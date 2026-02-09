@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find an Agent — sd.insure</title>
+  <meta name="description" content="Search our directory of independent insurance agents across South Dakota.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">sd<span>.insure</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="find-agent.html">Find an Agent</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="hero hero-sm">
+    <div class="hero-content">
+      <h1>Find a Local Agent</h1>
+      <p>Search our directory of independent insurance agents across South Dakota.</p>
+    </div>
+  </section>
+
+  <!-- Agent Finder -->
+  <section class="section">
+    <div class="container">
+      <div class="finder-layout">
+
+        <!-- Sidebar -->
+        <aside class="finder-sidebar">
+          <h3>Search Agents</h3>
+
+          <!-- Search Input -->
+          <input type="text" class="finder-search" placeholder="Search by name or city..." aria-label="Search agents">
+
+          <!-- Region Filter -->
+          <select class="finder-select" aria-label="Filter by region">
+            <option value="">All Regions</option>
+            <!-- AGENT FINDER: Region options will be populated dynamically -->
+            <option value="Southeast">Southeast</option>
+            <option value="Northeast">Northeast</option>
+            <option value="Central">Central</option>
+            <option value="West">West</option>
+          </select>
+
+          <!-- AGENT FINDER: Results list renders here -->
+          <div class="finder-results" id="agent-results">
+            <!-- Agent cards will be populated by agent-finder.js -->
+          </div>
+        </aside>
+
+        <!-- Map Container -->
+        <!-- ============================================================
+             AGENT FINDER MAP INTEGRATION POINT
+
+             Drop your existing map code into this container.
+             The div#agent-map is the mount point for the map instance.
+
+             Expected integration:
+             - Load your map library (Leaflet, Mapbox, etc.) in a <script> tag
+             - Initialize the map targeting #agent-map
+             - Load agent data from /data/agents.json
+             - Wire up the .finder-search input and .finder-select dropdown
+               to filter markers and the #agent-results list
+             ============================================================ -->
+        <div class="finder-map" id="agent-map">
+          <span>Map will load here</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <h2>Can't Find What You're Looking For?</h2>
+    <p>Reach out directly and we'll help connect you with an agent in your area.</p>
+    <div class="btn-group">
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h4>sd.insure</h4>
+        <p>The Independent Insurance Agents of South Dakota. Helping South Dakotans find the right coverage from local agents who put you first.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Insurance</h4>
+        <a href="insurance/home.html">Home</a>
+        <a href="insurance/auto.html">Auto</a>
+        <a href="insurance/business.html">Business</a>
+        <a href="insurance/farm.html">Farm &amp; Ranch</a>
+        <a href="insurance/crop.html">Crop</a>
+        <a href="insurance/health.html">Health</a>
+        <a href="insurance/life.html">Life</a>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <a href="find-agent.html">Find an Agent</a>
+        <a href="about.html">About IIASD</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Independent Insurance Agents of South Dakota. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <!-- AGENT FINDER: Add your map script(s) here -->
+  <!-- <script src="../js/agent-finder.js"></script> -->
+</body>
+</html>

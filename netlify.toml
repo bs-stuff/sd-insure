@@ -1,0 +1,74 @@
+# sd.insure — Netlify Configuration
+
+[build]
+  publish = "."
+
+# Clean URL rewrites
+[[redirects]]
+  from = "/find-agent"
+  to = "/pages/find-agent.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/pages/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/pages/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/home"
+  to = "/pages/insurance/home.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/auto"
+  to = "/pages/insurance/auto.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/business"
+  to = "/pages/insurance/business.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/farm"
+  to = "/pages/insurance/farm.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/crop"
+  to = "/pages/insurance/crop.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/health"
+  to = "/pages/insurance/health.html"
+  status = 200
+
+[[redirects]]
+  from = "/insurance/life"
+  to = "/pages/insurance/life.html"
+  status = 200
+
+# Cache static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

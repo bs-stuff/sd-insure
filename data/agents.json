@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Prairie Insurance Agency",
+    "address": "123 Main Street",
+    "city": "Sioux Falls",
+    "region": "Southeast",
+    "phone": "(605) 555-0101",
+    "website": "https://example.com",
+    "lat": 43.5446,
+    "lng": -96.7311
+  },
+  {
+    "id": 2,
+    "name": "Black Hills Insurance Group",
+    "address": "456 Mount Rushmore Rd",
+    "city": "Rapid City",
+    "region": "West",
+    "phone": "(605) 555-0202",
+    "website": "https://example.com",
+    "lat": 44.0805,
+    "lng": -103.2310
+  },
+  {
+    "id": 3,
+    "name": "Missouri River Insurance",
+    "address": "789 Capitol Ave",
+    "city": "Pierre",
+    "region": "Central",
+    "phone": "(605) 555-0303",
+    "website": "https://example.com",
+    "lat": 44.3683,
+    "lng": -100.3510
+  }
+]
