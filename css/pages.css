@@ -94,9 +94,10 @@
 /* Insurance Grid (Homepage)
    ========================================================================== */
 .insurance-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.25rem;
+  justify-content: center;
 }
 
 .insurance-card {
@@ -114,6 +115,7 @@
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
+  flex: 0 1 calc(25% - 1rem);
 }
 
 .insurance-card::before {
@@ -156,15 +158,9 @@
   font-size: 1rem;
 }
 
-@media (max-width: 900px) {
-  .insurance-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 @media (max-width: 640px) {
   .insurance-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
