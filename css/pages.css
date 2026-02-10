@@ -72,20 +72,23 @@
 }
 
 .hero-sm {
-  padding: 2.25rem 1.5rem 2rem;
-}
-
-.hero-sm h1::after {
-  margin: 0.75rem auto 0;
+  padding: 1.75rem 1.5rem 1.5rem;
 }
 
 .hero-sm h1 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+}
+
+.hero-sm h1::after {
+  width: 40px;
+  height: 2px;
+  margin: 0.6rem auto 0;
 }
 
 .hero-sm p {
-  font-size: 1rem;
-  margin: 0.75rem auto 0;
+  font-size: 0.95rem;
+  margin: 0.5rem auto 0;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* Insurance Grid (Homepage)
@@ -349,7 +352,7 @@
 /* Insurance Info Pages
    ========================================================================== */
 .info-section {
-  padding: var(--section-pad);
+  padding: 3.5rem 1.5rem;
 }
 
 .info-section:nth-child(even) {
@@ -362,7 +365,8 @@
 }
 
 .info-content h2 {
-  margin-bottom: 1.25rem;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  margin-bottom: 1rem;
 }
 
 .info-content p {
@@ -396,7 +400,7 @@
 /* About Page
    ========================================================================== */
 .about-section {
-  padding: var(--section-pad);
+  padding: 3.5rem 1.5rem;
 }
 
 .about-section:nth-child(even) {
@@ -409,7 +413,8 @@
 }
 
 .about-content h2 {
-  margin-bottom: 1.25rem;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  margin-bottom: 1rem;
 }
 
 .about-content p {
