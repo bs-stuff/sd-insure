@@ -5,25 +5,33 @@
 /* Custom Properties
    ========================================================================== */
 :root {
-  --gold: #C8A456;
-  --gold-dark: #A8873E;
-  --sage: #5B7B6A;
-  --sage-dark: #4A6557;
-  --cream: #FAF7F2;
-  --charcoal: #2C2926;
-  --rust: #B8654A;
-  --warm-gray: #E8E4DF;
+  --navy: #1a2744;
+  --navy-light: #22304d;
+  --navy-mid: #2a3d5e;
+  --gold: #c9a84c;
+  --gold-dark: #b5953f;
+  --gold-light: #dcc36f;
+  --gold-glow: rgba(201, 168, 76, 0.10);
+  --sage: #4a8c6f;
+  --sage-dark: #3d7560;
+  --cream: #f7f8fa;
+  --charcoal: #1a2744;
+  --rust: #c45c3e;
+  --warm-gray: #e2e6ed;
+  --text-muted: #5b6578;
 
   --font-heading: 'DM Serif Display', serif;
   --font-body: 'Outfit', sans-serif;
 
   --max-width: 1200px;
-  --section-pad: 5rem 1.5rem;
-  --section-pad-sm: 3rem 1rem;
-  --radius: 6px;
-  --shadow: 0 2px 12px rgba(44, 41, 38, 0.08);
-  --shadow-lg: 0 8px 30px rgba(44, 41, 38, 0.12);
-  --transition: 0.3s ease;
+  --section-pad: 6rem 1.5rem;
+  --section-pad-sm: 3.5rem 1rem;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(26, 39, 68, 0.03), 0 4px 16px rgba(26, 39, 68, 0.06);
+  --shadow-lg: 0 4px 8px rgba(26, 39, 68, 0.04), 0 16px 48px rgba(26, 39, 68, 0.08);
+  --shadow-xl: 0 8px 16px rgba(26, 39, 68, 0.05), 0 24px 64px rgba(26, 39, 68, 0.12);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Reset
@@ -82,14 +90,14 @@ button {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--charcoal);
 }
 
-h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
-h4 { font-size: 1.25rem; }
+h1 { font-size: clamp(2.5rem, 5.5vw, 4rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.85rem, 4vw, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.6rem); }
+h4 { font-size: 1.15rem; }
 
 p {
   margin-bottom: 1rem;
@@ -114,17 +122,28 @@ p:last-child {
 
 .section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .section-header h2 {
   margin-bottom: 1rem;
 }
 
+.section-header h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
 .section-header p {
   margin: 0 auto;
-  color: #6B6560;
+  color: var(--text-muted);
   font-size: 1.1rem;
+  max-width: 52ch;
 }
 
 .text-center { text-align: center; }
@@ -136,8 +155,8 @@ p:last-child {
 /* Scroll-triggered fade-in */
 .fade-in {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fade-in.visible {
