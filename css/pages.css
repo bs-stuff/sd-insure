@@ -426,6 +426,29 @@
   color: var(--text-muted);
 }
 
+.about-content ul {
+  margin-bottom: 1.25rem;
+  padding-left: 0;
+}
+
+.about-content li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: var(--text-muted);
+}
+
+.about-content li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
 .value-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
