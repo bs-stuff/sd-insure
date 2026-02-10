@@ -182,4 +182,26 @@ p:last-child {
   .section {
     padding: var(--section-pad-sm);
   }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
 }
