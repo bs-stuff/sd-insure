@@ -2,14 +2,24 @@
    sd.insure — Member Map Styles
    ========================================================================== */
 
+/* Full-height finder layout
+   ========================================================================== */
+.finder-section {
+  padding: 1rem 1.5rem;
+}
+
+.finder-section .container {
+  max-width: var(--max-width);
+}
+
 /* Search Panel
    ========================================================================== */
 .search-panel {
   background: #fff;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 1.5rem;
-  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .search-row {
@@ -144,14 +154,14 @@
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 1.25rem;
-  height: 600px;
+  height: calc(100vh - 160px);
+  min-height: 400px;
 }
 
 #map {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   z-index: 1;
-  height: 600px;
 }
 
 .sidebar {
@@ -160,8 +170,6 @@
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  height: 600px;
-  max-height: 600px;
   overflow: hidden;
 }
 
@@ -199,7 +207,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0.5rem;
-  max-height: calc(600px - 60px);
 }
 
 .mobile-toggle {
