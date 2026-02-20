@@ -10,12 +10,18 @@
 
     class AgentFinder {
       constructor() {
+        this.TRACK_URL = 'https://script.google.com/macros/s/AKfycbyjCaqRud6GwklwxNOhN3PHXrfvUV1uP5ayv9hQtVLmX7XvjFUpcYbOn5H2zl5Eida2Zw/exec';
         this.map = null;
         this.markers = null;
         this.filteredAgencies = [...agencies];
         this.activeCard = null;
         this.isSearching = false;
         this.init();
+      }
+
+      track(data) {
+        var params = new URLSearchParams(data);
+        fetch(this.TRACK_URL + '?' + params.toString()).catch(function() {});
       }
 
       init() {
@@ -87,12 +93,12 @@
         let logoHtml = '';
         if (agency.logo) { logoHtml = '<img src="' + agency.logo + '" class="popup-logo" alt="' + agency.name + ' logo" onerror="this.style.display=\'none\'">'; }
         let phoneHtml = '';
-        if (agency.phone) { const phoneDigits = agency.phone.replace(/[^0-9]/g, ''); phoneHtml = '<div class="phone"><strong>Phone:</strong> <a href="tel:' + phoneDigits + '">' + agency.phone + '</a></div>'; }
+        if (agency.phone) { const phoneDigits = agency.phone.replace(/[^0-9]/g, ''); phoneHtml = '<div class="phone"><strong>Phone:</strong> <a href="tel:' + phoneDigits + '" data-track="phone" data-agency="' + agency.name + '" data-city="' + (agency.city || '') + '" data-detail="' + agency.phone + '">' + agency.phone + '</a></div>'; }
         let websiteHtml = '';
-        if (agency.website) { const displayUrl = agency.website.replace(/^https?:\/\//, '').replace(/\/$/, ''); websiteHtml = '<div class="website"><a href="' + agency.website + '" target="_blank" rel="noopener">' + displayUrl + '</a></div>'; }
+        if (agency.website) { const displayUrl = agency.website.replace(/^https?:\/\//, '').replace(/\/$/, ''); websiteHtml = '<div class="website"><a href="' + agency.website + '" target="_blank" rel="noopener" data-track="website" data-agency="' + agency.name + '" data-city="' + (agency.city || '') + '" data-detail="' + displayUrl + '">' + displayUrl + '</a></div>'; }
         let badgesHtml = '';
         if (agency.insurance && agency.insurance.length > 0) { badgesHtml = '<div class="insurance-badges">' + agency.insurance.map(function(type) { return '<span class="insurance-badge ' + type + '">' + (typeLabels[type] || type) + '</span>'; }).join('') + '</div>'; }
-        return '<div class="popup-content">' + logoHtml + '<h3>' + agency.name + '</h3><div class="address">' + address + '</div>' + phoneHtml + websiteHtml + badgesHtml + '<a href="' + directionsUrl + '" target="_blank" class="btn-directions"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Get Directions</a></div>';
+        return '<div class="popup-content">' + logoHtml + '<h3>' + agency.name + '</h3><div class="address">' + address + '</div>' + phoneHtml + websiteHtml + badgesHtml + '<a href="' + directionsUrl + '" target="_blank" class="btn-directions" data-track="directions" data-agency="' + agency.name + '" data-city="' + (agency.city || '') + '"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Get Directions</a></div>';
       }
 
       renderList(showDistance) {
@@ -107,7 +113,7 @@
         let html = '';
         this.filteredAgencies.forEach(agency => {
           let contactHtml = '';
-          if (agency.phone) { contactHtml = '<div class="contact-info"><a href="tel:' + agency.phone.replace(/[^0-9]/g, '') + '">' + agency.phone + '</a></div>'; }
+          if (agency.phone) { contactHtml = '<div class="contact-info"><a href="tel:' + agency.phone.replace(/[^0-9]/g, '') + '" data-track="phone" data-agency="' + agency.name + '" data-city="' + (agency.city || '') + '" data-detail="' + agency.phone + '">' + agency.phone + '</a></div>'; }
           let badgesHtml = '';
           if (agency.insurance && agency.insurance.length > 0) { badgesHtml = '<div class="insurance-badges">' + agency.insurance.map(function(type) { return '<span class="insurance-badge ' + type + '">' + (typeLabels[type] || type) + '</span>'; }).join('') + '</div>'; }
           let logoHtml = '';
@@ -125,6 +131,7 @@
       focusOnAgency(id) {
         const agency = agencies.find(a => a.id === id);
         if (!agency) return;
+        this.track({ event: 'agency_click', agency: agency.name, city: agency.city || '' });
         if (window.innerWidth <= 600) {
           var mapResults = document.getElementById('map-results');
           mapResults.classList.remove('list-view');
@@ -170,6 +177,9 @@
       findAgents() {
         var type = document.getElementById('insurance-type').value;
         var zip = document.getElementById('zip-input').value.trim();
+        if (type || zip) {
+          this.track({ event: 'search', type: type || '', zip: zip || '' });
+        }
         var filtered = [...agencies];
         if (type) {
           filtered = filtered.filter(function(a) { return a.insurance && a.insurance.includes(type); });
@@ -233,6 +243,10 @@
         const toggleBtn = document.getElementById('toggle-list');
         toggleBtn.addEventListener('click', function() { const list = document.getElementById('results-list'); list.classList.toggle('hidden'); this.querySelector('span').textContent = list.classList.contains('hidden') ? 'Show List' : 'Hide List'; });
         this.map.on('moveend', function() { self.updateSidebarForBounds(); });
+        document.addEventListener('click', function(e) {
+          var el = e.target.closest('[data-track]');
+          if (el) { self.track({ event: el.dataset.track, agency: el.dataset.agency || '', city: el.dataset.city || '', detail: el.dataset.detail || '' }); }
+        });
         window.addEventListener('resize', function() { self.map.invalidateSize(); });
         document.querySelectorAll('.mobile-view-btn').forEach(function(btn) {
           btn.addEventListener('click', function() {
